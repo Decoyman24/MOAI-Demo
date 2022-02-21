@@ -47,6 +47,20 @@ class Badslime : SKSpriteNode, GameSprite, EventListenerNode {
         node.size = barSize
     }
     
+     func update(_ currentTime: TimeInterval) {
+        self.updateHealthBar(self, withHealthPoints: self.actualHP, withMaxHP: self.HP)
+        if self.actualHP <= 0 {
+            self.removeFromParent()
+        }
+        
+        if let redSlimePhysicsBody = Badslime().physicsBody {
+            if redSlimePhysicsBody.velocity.dx <= 0.0 && redSlimePhysicsBody.velocity.dy <= 0.1{
+                Badslime().physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                Badslime().zRotation = 0
+                }
+            }
+        }
+    
     func didMoveToScene() {
         //      physicsBody!.isDynamic = false
         self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
@@ -70,7 +84,7 @@ class Badslime : SKSpriteNode, GameSprite, EventListenerNode {
         }
     }
     
-    var HP = statValue.nextInt()*10
+    var HP = 30
     var PWR = statValue.nextInt()
     var DEF = statValue.nextInt()
     var AGI = statValue.nextInt()

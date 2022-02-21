@@ -13,9 +13,9 @@ let healthBarWidth: CGFloat = 80
 let healthBarHeight: CGFloat = 8
 
 struct PhysicsCategory { //Category constants per le collisioni
-  static let None: UInt32 = 0
-  static let Enemy: UInt32 = 0b1 // 1
-  static let Ally: UInt32 = 0b10 // 2
+    static let None: UInt32 = 0
+    static let Enemy: UInt32 = 0b1 // 1
+    static let Ally: UInt32 = 0b10 // 2
     static let Block: UInt32 = 0b100 // 3
     static let All: UInt32 = 0b1000 // 4
     static let Edge: UInt32 = 0b10000 // 8
@@ -23,11 +23,11 @@ struct PhysicsCategory { //Category constants per le collisioni
 
 
 protocol EventListenerNode {
-  func didMoveToScene()
+    func didMoveToScene()
 }
 
 protocol InteractiveNode {
-  func interact()
+    func interact()
 }
 
 
@@ -36,139 +36,157 @@ let random = GKRandomSource()
 let statValue = GKGaussianDistribution(randomSource: random, lowestValue: 1, highestValue: 9)
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        for touch in (touches) {
-//            let location = touch.location(in: self) //trova dove è avvenuto il tap
-//            let nodeTouched = atPoint(location) //capisce qual'è il nodo tappato in base a location
-//            if let gameSprite = nodeTouched as? GameSprite {
-//                gameSprite.onTap()
-//
-//            }
-//        }
-//    }
-        var sceneManagerDelegate: SceneManagerDelegate?
-        var myson = Redslime()
-        var originalMysonPos: CGPoint!
-        var hasGone = false
-
+    //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    //        for touch in (touches) {
+    //            let location = touch.location(in: self) //trova dove è avvenuto il tap
+    //            let nodeTouched = atPoint(location) //capisce qual'è il nodo tappato in base a location
+    //            if let gameSprite = nodeTouched as? GameSprite {
+    //                gameSprite.onTap()
+    //
+    //            }
+    //        }
+    //    }
+    var sceneManagerDelegate: SceneManagerDelegate?
+    var myson = Redslime()
+    var myenemy = Badslime()
+    var originalMysonPos: CGPoint!
+    var hasGone = false
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-            if !hasGone {
-                if let touch = touches.first {
-                    let touchLocation = touch.location(in: self)
-                    let touchedWhere = nodes(at: touchLocation)
-                    
-                    if !touchedWhere.isEmpty {
-                        for node in touchedWhere {
-                            originalMysonPos = touchLocation
-                            if let sprite = node as? Redslime {
-                                if sprite == myson {
-                                    myson.position = touchLocation
-                                }
+        if !hasGone {
+            if let touch = touches.first {
+                let touchLocation = touch.location(in: self)
+                let touchedWhere = nodes(at: touchLocation)
+                
+                if !touchedWhere.isEmpty {
+                    for node in touchedWhere {
+                        originalMysonPos = touchLocation
+                        if let sprite = node as? Redslime {
+                            if sprite == myson {
+                                myson.position = touchLocation
                             }
                         }
                     }
                 }
             }
         }
-    
-    
-        
-        override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-            if !hasGone {
-                if let touch = touches.first {
-                    let touchLocation = touch.location(in: self)
-                    let touchedWhere = nodes(at: touchLocation)
-                    
-                    if !touchedWhere.isEmpty {
-                        for node in touchedWhere {
-                            if let sprite = node as? Redslime {
-                                if sprite == myson {
-                                    myson.position = touchLocation
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-            if !hasGone {
-                if let touch = touches.first {
-                    let touchLocation = touch.location(in: self)
-                    let touchedWhere = nodes(at: touchLocation)
-                    
-                    if !touchedWhere.isEmpty {
-                        for node in touchedWhere {
-                            if let sprite = node as? Redslime {
-                                if sprite == myson {
-                                    let dx = (touchLocation.x - originalMysonPos.x)
-                                    let dy = (touchLocation.y - originalMysonPos.y)
-                                    let impulse = CGVector(dx: dx*2, dy: dy*2)
-                                    
-                                    myson.physicsBody?.applyImpulse(impulse)
-                                    hasGone = true
-                                    
-                                    
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        override func update(_ currentTime: TimeInterval) {
-            if let mysonPhysicsBody = myson.physicsBody {
-                if mysonPhysicsBody.velocity.dx >= 0.1 && mysonPhysicsBody.velocity.dy >= 0.1 && hasGone {
-                    myson.physicsBody?.velocity.dx -= 3.5
-                    myson.physicsBody?.velocity.dy -= 3.5
-//                    myson.position = originalMysonPos
-                    }
-                else if mysonPhysicsBody.velocity.dx <= 0 && mysonPhysicsBody.velocity.dy <= 0 && hasGone {
-                    myson.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-                    hasGone = false
-                }
-            }
-        }
-    
-    func collisionBetween(myson: SKNode, object: SKNode) {
-        if object.name == "dino" {
-    print("clash")
-        } else if object.name == "Muro" {
-    print("wall")
     }
+    
+    
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if !hasGone {
+            if let touch = touches.first {
+                let touchLocation = touch.location(in: self)
+                let touchedWhere = nodes(at: touchLocation)
+                
+                if !touchedWhere.isEmpty {
+                    for node in touchedWhere {
+                        if let sprite = node as? Redslime {
+                            if sprite == myson {
+                                myson.position = touchLocation
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
-           
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if !hasGone {
+            if let touch = touches.first {
+                let touchLocation = touch.location(in: self)
+                let touchedWhere = nodes(at: touchLocation)
+                
+                if !touchedWhere.isEmpty {
+                    for node in touchedWhere {
+                        if let sprite = node as? Redslime {
+                            if sprite == myson {
+                                let dx = (touchLocation.x - originalMysonPos.x)
+                                let dy = (touchLocation.y - originalMysonPos.y)
+                                let impulse = CGVector(dx: dx*2, dy: dy*2)
+                                
+                                myson.physicsBody?.applyImpulse(impulse)
+                                hasGone = true
+                                
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        if myson.actualHP<=0 {
+            myson.removeFromParent()
+        }
+        
+        if myenemy.actualHP<=0 {
+            myenemy.removeFromParent()
+        }
+        
+        if let mysonPhysicsBody = myson.physicsBody {
+            if mysonPhysicsBody.velocity.dx >= 0.1 && mysonPhysicsBody.velocity.dy >= 0.1 && hasGone {
+                myson.physicsBody?.velocity.dx -= 3.5
+                myson.physicsBody?.velocity.dy -= 3.5
+                //                    myson.position = originalMysonPos
+            }
+            else if mysonPhysicsBody.velocity.dx <= 0 && mysonPhysicsBody.velocity.dy <= 0 && hasGone {
+                myson.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                hasGone = false
+            }
+        }
+    }
+    
+    //    func collisionBetween(myson: SKNode, object: SKNode) {
+    //        if object.name == "dino" {
+    //    print("clash")
+    //        } else if object.name == "Muro" {
+    //    print("wall")
+    //    }
+    //    }
+    
+    
+    func clash (body1: Redslime, body2: Badslime) {
+        print("CLASH!")
+//        body1.actualHP -= 10
+        body2.actualHP -= 10
+        body2.updateHealthBar(body2, withHealthPoints: body2.actualHP, withMaxHP: body2.HP)
+    }
+    
+    
     func didBegin(_ contact: SKPhysicsContact) {
         let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         if collision == PhysicsCategory.Enemy | PhysicsCategory.Ally {
             run(SKAction.playSoundFileNamed("Bruh Sound Effect.mp3", waitForCompletion: false))
-        }
-    
-        func didEnd(_ contact: SKPhysicsContact) {
-            let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+            clash(body1: myson, body2: myenemy)
             
-            if collision == PhysicsCategory.Enemy | PhysicsCategory.Ally {
-                print("clash")
-            }
+        }
+        
+        func didEnd(_ contact: SKPhysicsContact) {
+            //            let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+            //            if collision == PhysicsCategory.Enemy | PhysicsCategory.Ally {
+            //            }
         }
     }
     
     override func didMove(to view: SKView) {
         
-//        let maxAspectRatio: CGFloat = 16.0/9.0
-//        let maxAspectRatioHeight = size.width / maxAspectRatio
-//        let playableMargin: CGFloat = (size.height
-//          - maxAspectRatioHeight)/2
-//        let playableRect = CGRect(x: 0, y: playableMargin,
-//                                  width: size.width, height: size.height)
+        //        let maxAspectRatio: CGFloat = 16.0/9.0
+        //        let maxAspectRatioHeight = size.width / maxAspectRatio
+        //        let playableMargin: CGFloat = (size.height
+        //          - maxAspectRatioHeight)/2
+        //        let playableRect = CGRect(x: 0, y: playableMargin,
+        //                                  width: size.width, height: size.height)
         
         
         
-//        physicsBody = SKPhysicsBody(edgeLoopFrom: playableRect)
-//        physicsBody!.restitution = 0.5
-       
+        //        physicsBody = SKPhysicsBody(edgeLoopFrom: playableRect)
+        //        physicsBody!.restitution = 0.5
+        
         let background = SKSpriteNode(imageNamed: "Battle Arena-1")
         background.position = CGPoint(x: 0, y: 0)
         background.blendMode = .replace
@@ -190,61 +208,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         view.showsPhysics = true
         
         
-       
-            
-        
-//        let slime1 = Redslime()
-//        slime1.position = CGPoint(x: -100, y: 0)
-//        self.addChild(slime1)
-//        self.addChild(slime1.playerbar)
-//        slime1.playerbar.position = CGPoint(
-//            x: slime1.position.x,
-//            y: slime1.position.y + slime1.size.height/2
-//        )
-//        print(slime1.HP, slime1.actualHP, slime1.AGI, slime1.PWR, slime1.DEF)
-//
-//        let slime2 = Redslime()
-//        slime2.position = CGPoint(x: 100, y:0)
-//        self.addChild(slime2)
-//        self.addChild(slime2.playerbar)
-//        slime2.playerbar.position = CGPoint(
-//            x: slime2.position.x,
-//            y: slime2.position.y + slime2.size.height/2
-//        )
-//        print(slime2.HP, slime2.AGI, slime2.PWR, slime2.DEF)
-//
-        
-        
-//
-//        let allyPiece = Redslime()
-//        allyPiece.position = CGPoint(x: -50, y: 0)
-//        allyPiece.playerbar.position = CGPoint(x: allyPiece.position.x + 40, y: allyPiece.position.y + ((allyPiece.size.height/2)) + 5)
-//        allyPiece.setScale(0.7)
-//        addChild(allyPiece)
-//        allyPiece.addChild(allyPiece.playerbar)
-//        allyPiece.physicsBody = SKPhysicsBody(circleOfRadius: allyPiece.size.width/2)
-//        allyPiece.physicsBody?.collisionBitMask = 1
-//        allyPiece.physicsBody?.categoryBitMask = 2
-//        allyPiece.physicsBody?.allowsRotation = false
-//        allyPiece.physicsBody?.mass = 1
-//        allyPiece.physicsBody?.restitution = 0.5
-        
-        let enemyPiece = Badslime()
-        enemyPiece.position = CGPoint(x: 0, y: +160)
-        enemyPiece.name = "dino"
-        enemyPiece.playerbar.position = CGPoint(x: enemyPiece.position.x, y: enemyPiece.position.y - 20)
-        enemyPiece.setScale(0.4)
-        enemyPiece.physicsBody = SKPhysicsBody(circleOfRadius: enemyPiece.size.width/3)
-        enemyPiece.physicsBody?.mass = 1.2
-        enemyPiece.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
-        enemyPiece.physicsBody?.collisionBitMask = PhysicsCategory.Ally
-        enemyPiece.physicsBody?.contactTestBitMask = PhysicsCategory.Ally
-        enemyPiece.physicsBody?.allowsRotation = false
-        enemyPiece.physicsBody?.restitution = 0.5
-        enemyPiece.physicsBody?.friction = 0.8
-        addChild(enemyPiece)
-        enemyPiece.addChild(enemyPiece.playerbar)
-//        enemyPiece.physicsBody?.isDynamic = true
+        myenemy.position = CGPoint(x: 0, y: +160)
+        myenemy.name = "dino"
+        myenemy.playerbar.position = CGPoint(x: myenemy.position.x, y: myenemy.position.y - 20)
+        myenemy.setScale(0.4)
+        myenemy.physicsBody = SKPhysicsBody(circleOfRadius: myenemy.size.width/3)
+        myenemy.physicsBody?.mass = 1.2
+        myenemy.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
+        myenemy.physicsBody?.collisionBitMask = PhysicsCategory.Ally
+        myenemy.physicsBody?.contactTestBitMask = PhysicsCategory.Ally
+        myenemy.physicsBody?.allowsRotation = false
+        myenemy.physicsBody?.restitution = 0.5
+        myenemy.physicsBody?.friction = 0.8
+        addChild(myenemy)
+        myenemy.addChild(myenemy.playerbar)
+        //        enemyPiece.physicsBody?.isDynamic = true
         
         myson.position = CGPoint(x: 0, y: -180)
         myson.name = "myson"
@@ -259,39 +237,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         originalMysonPos = myson.position
         myson.playerbar.position = CGPoint(x: myson.position.x, y: myson.position.y-(myson.position.y*2 + 20))
         addChild(myson)
-//        myson.physicsBody?.isDynamic = true
+        //        myson.physicsBody?.isDynamic = true
         myson.setScale(0.4)
         myson.addChild(myson.playerbar)
         
         
-//
+        //
         
-        func clash (body1: Redslime, body2: Badslime) {
-            print("CLASH!")
-            body1.actualHP -= 10
-            body2.actualHP -= 10
-        }
         
         
     }
-
-        //MARK: HEALTH BARS POSITION
-       
-        
-       
-        
-        //MARK: DMG CALC WITH FRAMES
-        
-        
-//
-//        player1HP = max(0, player1HP - (slime2.PWR - (slime1.DEF)/2))
-//        player2HP = max(0, player2HP - (slime1.PWR - (slime2.DEF)/2))
-        
     
-        
-       
-        
-        //MARK: UPDATE HB FUNCTION
-       
-    }
+    //MARK: HEALTH BARS POSITION
+    
+    
+    
+    
+    //MARK: DMG CALC WITH FRAMES
+    
+    
+    //
+    //        player1HP = max(0, player1HP - (slime2.PWR - (slime1.DEF)/2))
+    //        player2HP = max(0, player2HP - (slime1.PWR - (slime2.DEF)/2))
+    
+    
+    
+    
+    
+    //MARK: UPDATE HB FUNCTION
+    
+}
 

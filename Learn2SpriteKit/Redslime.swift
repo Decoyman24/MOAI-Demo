@@ -7,8 +7,7 @@
 
 import SpriteKit
 
-class Redslime : SKSpriteNode, GameSprite, EventListenerNode, InteractiveNode {
-//    bruh
+class Redslime : SKSpriteNode, GameSprite, EventListenerNode {
     var initialSize: CGSize = CGSize (width: 250, height: 250)
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "goblin")
     var idleAnimation = SKAction()
@@ -48,6 +47,11 @@ class Redslime : SKSpriteNode, GameSprite, EventListenerNode, InteractiveNode {
     }
     
     func update(_ currentTime: TimeInterval) {
+        self.updateHealthBar(self, withHealthPoints: self.actualHP, withMaxHP: self.HP)
+        if self.actualHP == 0 {
+            self.removeFromParent()
+        }
+        
         if let redSlimePhysicsBody = Redslime().physicsBody {
             if redSlimePhysicsBody.velocity.dx <= 0.0 && redSlimePhysicsBody.velocity.dy <= 0.1{
                 Redslime().physicsBody?.velocity = CGVector(dx: 0, dy: 0)
@@ -63,19 +67,14 @@ class Redslime : SKSpriteNode, GameSprite, EventListenerNode, InteractiveNode {
 //        self.physicsBody!.contactTestBitMask = PhysicsCategory.Enemy
     }
     
-    func interact() {
-        isUserInteractionEnabled = false
-        run(SKAction.playSoundFileNamed("pop.mp3", waitForCompletion: false))
-      }
     
     func onTap(){
         isTapped.toggle()
-        interact()
-        self.physicsBody?.applyImpulse(CGVector(dx:400, dy:40))
         if actualHP>0 {
         self.updateHealthBar(self.playerbar, withHealthPoints: self.actualHP, withMaxHP: self.HP)
         print("Hai tappato mongoloide, ora hai \(actualHP) hp")
         }
+        
         else if actualHP<=0 {
             playerbar.run(SKAction.removeFromParent())
             run(SKAction.removeFromParent())
@@ -83,7 +82,7 @@ class Redslime : SKSpriteNode, GameSprite, EventListenerNode, InteractiveNode {
         }
     }
     
-    var HP = statValue.nextInt()*10
+    var HP = 30
     var PWR = statValue.nextInt()
     var DEF = statValue.nextInt()
     var AGI = statValue.nextInt()
