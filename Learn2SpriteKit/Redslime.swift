@@ -8,7 +8,7 @@
 import SpriteKit
 
 class Redslime : SKSpriteNode, GameSprite, EventListenerNode, InteractiveNode {
-    
+//    bruh
     var initialSize: CGSize = CGSize (width: 250, height: 250)
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "goblin")
     var idleAnimation = SKAction()
