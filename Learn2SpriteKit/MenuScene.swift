@@ -18,8 +18,8 @@ class MenuScene: SKScene {
             for touch in touches {
                 if touch == touches.first{
                     print("going to gameplay scene")
-                    let gameScene = GameScene(fileNamed: "GameScene")
-                    self.view?.presentScene(gameScene!, transition: SKTransition.fade(withDuration: 0.5))
+                    let mainMenu = MainMenu(fileNamed: "MainMenu")
+                    self.view?.presentScene(mainMenu!, transition: SKTransition.fade(withDuration: 0.5))
                 }
             }
         }

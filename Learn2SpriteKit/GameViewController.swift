@@ -12,6 +12,8 @@ import GameplayKit
 protocol SceneManagerDelegate {
     func presentMenuScene()
     func presentGameScene()
+    func presentLevelSelectionScene()
+    func presentMainMenu()
 }
 
 class GameViewController: UIViewController {
@@ -69,5 +71,17 @@ extension GameViewController: SceneManagerDelegate {
         let gameScene = GameScene(fileNamed: "GameScene")
         gameScene?.sceneManagerDelegate = self
         self.present(scene: gameScene!)
+    }
+    
+    func presentLevelSelectionScene() {
+        let levelSelectionScene = LevelSelectionScene(fileNamed: "LevelSelectionScene")
+        levelSelectionScene?.sceneManagerDelegate = self
+        self.present(scene: levelSelectionScene!)
+    }
+    
+    func presentMainMenu(){
+        let mainMenu = MainMenu(fileNamed: "MainMenu")
+        mainMenu?.sceneManagerDelegate=self
+        self.present(scene: mainMenu!)
     }
 }
