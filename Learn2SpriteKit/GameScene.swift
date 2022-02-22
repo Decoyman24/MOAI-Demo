@@ -75,6 +75,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        myson.physicsBody?.isDynamic = true
         if !hasGone {
             if let touch = touches.first {
                 let touchLocation = touch.location(in: self)
@@ -136,6 +137,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             else if mysonPhysicsBody.velocity.dx <= 0 && mysonPhysicsBody.velocity.dy <= 0 && hasGone {
                 myson.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                myson.physicsBody?.isDynamic = false
                 hasGone = false
             }
         }
@@ -165,13 +167,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             clash(body1: myson, body2: myenemy)
             
         }
-        
+    }
         func didEnd(_ contact: SKPhysicsContact) {
             //            let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
             //            if collision == PhysicsCategory.Enemy | PhysicsCategory.Ally {
             //            }
         }
-    }
     
     override func didMove(to view: SKView) {
         
