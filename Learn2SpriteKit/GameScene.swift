@@ -50,8 +50,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var myson = Redslime()
         var originalMysonPos: CGPoint!
         var hasGone = false
-
+        let pauseAlertBox: SKSpriteNode = SKSpriteNode(imageNamed: "PauseAlert")
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        guard let touch = touches.first else { return }
+        let touchLocation = touch.location(in: self)
+        touchedButton(touchLocation: touchLocation)
+        
             if !hasGone {
                 if let touch = touches.first {
                     let touchLocation = touch.location(in: self)
@@ -119,6 +125,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         override func update(_ currentTime: TimeInterval) {
+            pauseAlertBox.zPosition = 50
             if let mysonPhysicsBody = myson.physicsBody {
                 if mysonPhysicsBody.velocity.dx >= 0.1 && mysonPhysicsBody.velocity.dy >= 0.1 && hasGone {
                     myson.physicsBody?.velocity.dx -= 3.5
@@ -131,6 +138,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
+    
+    func touchedButton(touchLocation: CGPoint) {
+        let nodeAtPoint = atPoint(touchLocation)
+        if let touchedNode = nodeAtPoint as? SKSpriteNode {
+            print(touchedNode)
+            if touchedNode.name?.starts(with: "PauseButton") == true {
+                SKAction.fadeIn(withDuration: 2)
+                
+                print(pauseAlertBox.zPosition)
+                    
+                
+            }
+            else if touchedNode.name?.starts(with: "BackButton") == true{
+                let gameScene = GameScene(fileNamed: "GameScene")
+                self.view?.presentScene(gameScene!, transition: SKTransition.fade(withDuration: 0.5))
+            }
+        }
+    }
     
     func collisionBetween(myson: SKNode, object: SKNode) {
         if object.name == "dino" {
