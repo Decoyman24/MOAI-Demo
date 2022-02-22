@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-class Redslime : SKSpriteNode, GameSprite, EventListenerNode {
+class AllyMonster : SKSpriteNode, GameSprite, EventListenerNode {
     var initialSize: CGSize = CGSize (width: 250, height: 250)
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "goblin")
     var idleAnimation = SKAction()
@@ -52,10 +52,10 @@ class Redslime : SKSpriteNode, GameSprite, EventListenerNode {
             self.removeFromParent()
         }
         
-        if let redSlimePhysicsBody = Redslime().physicsBody {
+        if let redSlimePhysicsBody = AllyMonster().physicsBody {
             if redSlimePhysicsBody.velocity.dx <= 0.0 && redSlimePhysicsBody.velocity.dy <= 0.1{
-                Redslime().physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-                Redslime().zRotation = 0
+                AllyMonster().physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                AllyMonster().zRotation = 0
                 }
             }
         }

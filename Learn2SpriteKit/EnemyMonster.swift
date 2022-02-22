@@ -6,7 +6,7 @@
 //
 import SpriteKit
 
-class Badslime : SKSpriteNode, GameSprite, EventListenerNode {
+class EnemyMonster : SKSpriteNode, GameSprite, EventListenerNode {
     
     var initialSize: CGSize = CGSize (width: 250, height: 250)
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "blackie")
@@ -53,10 +53,10 @@ class Badslime : SKSpriteNode, GameSprite, EventListenerNode {
             self.removeFromParent()
         }
         
-        if let redSlimePhysicsBody = Badslime().physicsBody {
+        if let redSlimePhysicsBody = EnemyMonster().physicsBody {
             if redSlimePhysicsBody.velocity.dx <= 0.0 && redSlimePhysicsBody.velocity.dy <= 0.1{
-                Badslime().physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-                Badslime().zRotation = 0
+                EnemyMonster().physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                EnemyMonster().zRotation = 0
                 }
             }
         }
