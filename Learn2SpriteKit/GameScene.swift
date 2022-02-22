@@ -56,6 +56,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if let touch = touches.first {
                     let touchLocation = touch.location(in: self)
                     let touchedWhere = nodes(at: touchLocation)
+                    myson.physicsBody?.pinned = false
                     
                     if !touchedWhere.isEmpty {
                         for node in touchedWhere {
@@ -120,25 +121,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         override func update(_ currentTime: TimeInterval) {
             if let mysonPhysicsBody = myson.physicsBody {
-                if mysonPhysicsBody.velocity.dx >= 0.1 && mysonPhysicsBody.velocity.dy >= 0.1 && hasGone {
-                    myson.physicsBody?.velocity.dx -= 3.5
-                    myson.physicsBody?.velocity.dy -= 3.5
-//                    myson.position = originalMysonPos
+                
+                if mysonPhysicsBody.velocity.dx > 0.5 && hasGone {
+                    myson.physicsBody?.velocity.dx -= 1.1
                     }
-                else if mysonPhysicsBody.velocity.dx <= 0 && mysonPhysicsBody.velocity.dy <= 0 && hasGone {
-                    myson.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                if mysonPhysicsBody.velocity.dx < -0.5 && hasGone {
+                    myson.physicsBody?.velocity.dx += 1.1
+                    }
+                else if mysonPhysicsBody.velocity.dx <= 0.5 && mysonPhysicsBody.velocity.dx >= -0.5 && hasGone {
+                    myson.physicsBody?.velocity.dx = 0.0
+                }
+                
+                if mysonPhysicsBody.velocity.dy > 0.5 && hasGone {
+                    myson.physicsBody?.velocity.dy -= 1.1
+                    }
+                if mysonPhysicsBody.velocity.dy < -0.5 && hasGone {
+                    myson.physicsBody?.velocity.dy += 1.1
+                    }
+                else if mysonPhysicsBody.velocity.dy <= 0.5 && mysonPhysicsBody.velocity.dy >= -0.5 && hasGone {
+                    myson.physicsBody?.velocity.dy = 0.0
+                }
+                if mysonPhysicsBody.velocity.dx == 0 && mysonPhysicsBody.velocity.dy == 0 && hasGone
+                {
+                    myson.physicsBody?.pinned = true
+
                     hasGone = false
                 }
             }
         }
     
-    func collisionBetween(myson: SKNode, object: SKNode) {
-        if object.name == "dino" {
-    print("clash")
-        } else if object.name == "Muro" {
-    print("wall")
-    }
-    }
            
     func didBegin(_ contact: SKPhysicsContact) {
         let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
@@ -242,6 +253,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemyPiece.physicsBody?.allowsRotation = false
         enemyPiece.physicsBody?.restitution = 0.5
         enemyPiece.physicsBody?.friction = 0.8
+        enemyPiece.physicsBody?.pinned = false
+
         addChild(enemyPiece)
         enemyPiece.addChild(enemyPiece.playerbar)
 //        enemyPiece.physicsBody?.isDynamic = true
@@ -256,6 +269,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         myson.physicsBody?.allowsRotation = false
         myson.physicsBody?.restitution = 0.3
         myson.physicsBody?.friction = 0.8
+        myson.physicsBody?.pinned = false
         originalMysonPos = myson.position
         myson.playerbar.position = CGPoint(x: myson.position.x, y: myson.position.y-(myson.position.y*2 + 20))
         addChild(myson)
