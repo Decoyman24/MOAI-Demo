@@ -29,6 +29,14 @@
 		A6E7F9C527C3E90800DFF021 /* LevelSelectionScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A6E7F9C427C3E90800DFF021 /* LevelSelectionScene.sks */; };
 		A6E7F9C727C3F98900DFF021 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E7F9C627C3F98900DFF021 /* MainMenu.swift */; };
 		A6E7F9C927C3FD0100DFF021 /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = A6E7F9C827C3FD0100DFF021 /* MainMenu.sks */; };
+		A6E7F9CB27C52F3600DFF021 /* FireMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E7F9CA27C52F3600DFF021 /* FireMenu.swift */; };
+		A6E7F9CD27C5357200DFF021 /* FireMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = A6E7F9CC27C5357200DFF021 /* FireMenu.sks */; };
+		A6E7F9CF27C5395600DFF021 /* WaterMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E7F9CE27C5395600DFF021 /* WaterMenu.swift */; };
+		A6E7F9D127C539F700DFF021 /* WaterMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = A6E7F9D027C539F700DFF021 /* WaterMenu.sks */; };
+		A6E7F9D327C53F2500DFF021 /* AirMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E7F9D227C53F2500DFF021 /* AirMenu.swift */; };
+		A6E7F9D527C53FBE00DFF021 /* AirMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = A6E7F9D427C53FBE00DFF021 /* AirMenu.sks */; };
+		A6E7F9D727C5438700DFF021 /* LeafMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6E7F9D627C5438700DFF021 /* LeafMenu.swift */; };
+		A6E7F9D927C543FA00DFF021 /* LeafMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = A6E7F9D827C543FA00DFF021 /* LeafMenu.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +63,14 @@
 		A6E7F9C427C3E90800DFF021 /* LevelSelectionScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LevelSelectionScene.sks; sourceTree = "<group>"; };
 		A6E7F9C627C3F98900DFF021 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		A6E7F9C827C3FD0100DFF021 /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
+		A6E7F9CA27C52F3600DFF021 /* FireMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireMenu.swift; sourceTree = "<group>"; };
+		A6E7F9CC27C5357200DFF021 /* FireMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireMenu.sks; sourceTree = "<group>"; };
+		A6E7F9CE27C5395600DFF021 /* WaterMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterMenu.swift; sourceTree = "<group>"; };
+		A6E7F9D027C539F700DFF021 /* WaterMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WaterMenu.sks; sourceTree = "<group>"; };
+		A6E7F9D227C53F2500DFF021 /* AirMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirMenu.swift; sourceTree = "<group>"; };
+		A6E7F9D427C53FBE00DFF021 /* AirMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AirMenu.sks; sourceTree = "<group>"; };
+		A6E7F9D627C5438700DFF021 /* LeafMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeafMenu.swift; sourceTree = "<group>"; };
+		A6E7F9D827C543FA00DFF021 /* LeafMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LeafMenu.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +113,10 @@
 				A6E7F9C227C3E69D00DFF021 /* LevelSelectionScene.swift */,
 				1C2AB9DB277095C8009DCD64 /* GameViewController.swift */,
 				A6E7F9C627C3F98900DFF021 /* MainMenu.swift */,
+				A6E7F9CA27C52F3600DFF021 /* FireMenu.swift */,
+				A6E7F9CE27C5395600DFF021 /* WaterMenu.swift */,
+				A6E7F9D227C53F2500DFF021 /* AirMenu.swift */,
+				A6E7F9D627C5438700DFF021 /* LeafMenu.swift */,
 				439DFF6427BEA749004D323B /* MenuScene.swift */,
 				439DFF6827BEA9C1004D323B /* SKNode Ext.swift */,
 				439DFF6627BEA990004D323B /* SpriteKitButton.swift */,
@@ -104,6 +124,10 @@
 				1C2AB9DD277095C8009DCD64 /* Main.storyboard */,
 				1C2AB9E2277095C9009DCD64 /* LaunchScreen.storyboard */,
 				1CDA603527AC273900CD7B7F /* GameScene.sks */,
+				A6E7F9D827C543FA00DFF021 /* LeafMenu.sks */,
+				A6E7F9D427C53FBE00DFF021 /* AirMenu.sks */,
+				A6E7F9D027C539F700DFF021 /* WaterMenu.sks */,
+				A6E7F9CC27C5357200DFF021 /* FireMenu.sks */,
 				A6E7F9C827C3FD0100DFF021 /* MainMenu.sks */,
 				A6E7F9C427C3E90800DFF021 /* LevelSelectionScene.sks */,
 				1C2AB9D7277095C8009DCD64 /* Actions.sks */,
@@ -181,13 +205,17 @@
 			files = (
 				1CAC519927BE4A41009A9AFA /* pop.mp3 in Resources */,
 				A6E7F9C927C3FD0100DFF021 /* MainMenu.sks in Resources */,
+				A6E7F9D127C539F700DFF021 /* WaterMenu.sks in Resources */,
+				A6E7F9CD27C5357200DFF021 /* FireMenu.sks in Resources */,
 				1C2AB9DF277095C8009DCD64 /* Main.storyboard in Resources */,
 				A6E7F9C527C3E90800DFF021 /* LevelSelectionScene.sks in Resources */,
 				1CDA603327AC273900CD7B7F /* GameScene.sks in Resources */,
+				A6E7F9D927C543FA00DFF021 /* LeafMenu.sks in Resources */,
 				1C2AB9E1277095C9009DCD64 /* Assets.xcassets in Resources */,
 				1C2AB9E4277095C9009DCD64 /* LaunchScreen.storyboard in Resources */,
 				1C2AB9D8277095C8009DCD64 /* Actions.sks in Resources */,
 				1C7277C927C3CEB600467D65 /* Bruh Sound Effect.mp3 in Resources */,
+				A6E7F9D527C53FBE00DFF021 /* AirMenu.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,14 +230,18 @@
 				1C89397227B2A19A007EE33F /* GameSprite.swift in Sources */,
 				1C2AB9DA277095C8009DCD64 /* GameScene.swift in Sources */,
 				1CB5710E27BD4B1300185669 /* Badslime.swift in Sources */,
+				A6E7F9CB27C52F3600DFF021 /* FireMenu.swift in Sources */,
 				439DFF6527BEA749004D323B /* MenuScene.swift in Sources */,
 				1CB5710A27BD06A900185669 /* SupportCode.swift in Sources */,
 				439DFF6727BEA990004D323B /* SpriteKitButton.swift in Sources */,
 				1C2AB9DC277095C8009DCD64 /* GameViewController.swift in Sources */,
+				A6E7F9D327C53F2500DFF021 /* AirMenu.swift in Sources */,
+				A6E7F9CF27C5395600DFF021 /* WaterMenu.swift in Sources */,
 				439DFF6927BEA9C1004D323B /* SKNode Ext.swift in Sources */,
 				1CB5710C27BD486100185669 /* Redslime.swift in Sources */,
 				A6E7F9C327C3E69D00DFF021 /* LevelSelectionScene.swift in Sources */,
 				434A36EB27BBF9D900F336D7 /* Types.swift in Sources */,
+				A6E7F9D727C5438700DFF021 /* LeafMenu.swift in Sources */,
 				1C2AB9D4277095C8009DCD64 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

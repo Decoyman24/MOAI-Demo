@@ -36,11 +36,11 @@ class LevelSelectionScene: SKScene {
         if let touchedNode = nodeAtPoint as? SKSpriteNode {
             if touchedNode.name?.starts(with: "Button1") == true {
                 let gameScene = GameScene(fileNamed: "GameScene")
-                self.view?.presentScene(gameScene!, transition: SKTransition.fade(withDuration: 0.5))
+                self.view?.presentScene(gameScene!, transition: SKTransition.fade(withDuration: 0.7))
             }
             else if touchedNode.name?.starts(with: "BackButton") == true{
                 let mainMenu = MainMenu(fileNamed: "MainMenu")
-                self.view?.presentScene(mainMenu!, transition: SKTransition.fade(withDuration: 0.5))
+                self.view?.presentScene(mainMenu!, transition: SKTransition.fade(withDuration: 0))
             }
         }
     }

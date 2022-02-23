@@ -84,4 +84,10 @@ extension GameViewController: SceneManagerDelegate {
         mainMenu?.sceneManagerDelegate=self
         self.present(scene: mainMenu!)
     }
+    
+    func presentFireMenu(){
+        let fireMenu = FireMenu(fileNamed: "FireMenu")
+        fireMenu?.sceneManagerDelegate=self
+        self.present(scene: fireMenu!)
+    }
 }

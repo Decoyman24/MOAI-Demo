@@ -25,9 +25,9 @@ class MainMenu: SKScene {
                 let levelSelectionScene = LevelSelectionScene(fileNamed: "LevelSelectionScene")
                 self.view?.presentScene(levelSelectionScene!, transition: SKTransition.fade(withDuration: 0.5))
             }
-            else if touchedNode.name?.starts(with: "BackButton") == true{
-                let menuScene = GameScene(fileNamed: "MenuScene")
-                self.view?.presentScene(menuScene!, transition: SKTransition.fade(withDuration: 0.5))
+            else if touchedNode.name?.starts(with: "TeamButton") == true{
+                let fireMenu = FireMenu(fileNamed: "FireMenu")
+                self.view?.presentScene(fireMenu!, transition: SKTransition.fade(withDuration: 0))
             }
         }
     }
