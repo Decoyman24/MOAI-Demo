@@ -46,12 +46,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //            }
 //        }
 //    }
+        let worldNode = SKNode()
         var sceneManagerDelegate: SceneManagerDelegate?
         var myson = Redslime()
         var originalMysonPos: CGPoint!
         var hasGone = false
+        var pauseAlertBox: SKSpriteNode = SKSpriteNode(imageNamed: "PauseAlert")
+        var pauseRetry: SKSpriteNode = SKSpriteNode(imageNamed: "PauseRetry")
+        var pauseExit: SKSpriteNode = SKSpriteNode(imageNamed: "PauseExit")
+        var pauseX: SKSpriteNode = SKSpriteNode(imageNamed:     "PauseX")
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        
+        guard let touch = touches.first else { return }
+        let touchLocation = touch.location(in: self)
+        touchedButton(touchLocation: touchLocation)
+        
             if !hasGone {
                 if let touch = touches.first {
                     let touchLocation = touch.location(in: self)
@@ -119,6 +130,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         override func update(_ currentTime: TimeInterval) {
+            if pauseAlertBox.isHidden {
+                pauseAlertBox.run(SKAction.hide())
+            } else {
+                pauseAlertBox.run(SKAction.unhide())
+            }
             if let mysonPhysicsBody = myson.physicsBody {
                 if mysonPhysicsBody.velocity.dx >= 0.1 && mysonPhysicsBody.velocity.dy >= 0.1 && hasGone {
                     myson.physicsBody?.velocity.dx -= 3.5
@@ -131,6 +147,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
+    
+    func touchedButton(touchLocation: CGPoint) {
+        let nodeAtPoint = atPoint(touchLocation)
+        if let touchedNode = nodeAtPoint as? SKSpriteNode {
+            print(touchedNode)
+            if touchedNode.name?.starts(with: "PauseButton") == true {
+                
+                pauseAlertBox.isHidden = false
+                worldNode.isPaused = true
+                physicsWorld.speed = 0
+                print(pauseAlertBox.isHidden.description)
+                print(pauseAlertBox.zPosition)
+                
+                
+            }
+            else if touchedNode.name?.starts(with: "PauseX") == true{
+                pauseAlertBox.isHidden = true
+                worldNode.isPaused = false
+                physicsWorld.speed = 1
+            }
+            else if touchedNode.name?.starts(with: "PauseRetry") == true{
+                let gameScene = GameScene(fileNamed: "GameScene")
+                self.view?.presentScene(gameScene!, transition: SKTransition.fade(withDuration: 0.5))
+            }
+            else if touchedNode.name?.starts(with: "PauseExit") == true{
+                let mainMenu = MainMenu(fileNamed: "MainMenu")
+                self.view?.presentScene(mainMenu!, transition: SKTransition.fade(withDuration: 0.5))
+            }
+        }
+    }
     
     func collisionBetween(myson: SKNode, object: SKNode) {
         if object.name == "dino" {
@@ -156,6 +202,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didMove(to view: SKView) {
+        
+        addChild(worldNode)
+        
+        pauseAlertBox.isHidden = true
+        
+        addChild(pauseAlertBox)
+        pauseAlertBox.zPosition = 50
+        
+        pauseAlertBox.addChild(pauseRetry)
+        pauseRetry.name = "PauseRetry"
+        pauseRetry.zPosition = 51
+        pauseRetry.position = CGPoint (x: 73, y: -30)
+        
+        pauseAlertBox.addChild(pauseExit)
+        pauseExit.name = "PauseExit"
+        pauseExit.zPosition = 51
+        pauseExit.position = CGPoint (x: -73, y: -30)
+        
+        pauseAlertBox.addChild(pauseX)
+        pauseX.name = "PauseX"
+        pauseX.zPosition = 51
+        pauseX.position = CGPoint (x: 100, y: 70)
+         
+        print(pauseAlertBox.isHidden.description)
         
 //        let maxAspectRatio: CGFloat = 16.0/9.0
 //        let maxAspectRatioHeight = size.width / maxAspectRatio
@@ -242,7 +312,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemyPiece.physicsBody?.allowsRotation = false
         enemyPiece.physicsBody?.restitution = 0.5
         enemyPiece.physicsBody?.friction = 0.8
-        addChild(enemyPiece)
+        worldNode.addChild(enemyPiece)
         enemyPiece.addChild(enemyPiece.playerbar)
 //        enemyPiece.physicsBody?.isDynamic = true
         
@@ -258,7 +328,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         myson.physicsBody?.friction = 0.8
         originalMysonPos = myson.position
         myson.playerbar.position = CGPoint(x: myson.position.x, y: myson.position.y-(myson.position.y*2 + 20))
-        addChild(myson)
+        worldNode.addChild(myson)
 //        myson.physicsBody?.isDynamic = true
         myson.setScale(0.4)
         myson.addChild(myson.playerbar)
