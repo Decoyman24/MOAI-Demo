@@ -90,7 +90,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if let touch = touches.first {
                 let touchLocation = touch.location(in: self)
                 let touchedWhere = nodes(at: touchLocation)
-                
                 if !touchedWhere.isEmpty {
                     for node in touchedWhere {
                         if let sprite = node as? Goblin {
@@ -122,20 +121,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                 let dx = (touchLocation.x - originalMysonPos.x)
                                 let dy = (touchLocation.y - originalMysonPos.y)
                                 myson.position = originalMysonPos
-                                let impulse = CGVector(dx: dx*1.5, dy: dy*1.5)
+                                let impulse = CGVector(dx: dx, dy: dy)
                                 
                                 myson.physicsBody?.applyImpulse(impulse)
-                                hasGone = true
-                            
-                            }
-                        }
-                        if let sprite = node as? Birb {
-                            if sprite == myson2 {
-                                let dx = (touchLocation.x - originalMyson2Pos.x)
-                                let dy = (touchLocation.y - originalMyson2Pos.y)
-                                let impulse = CGVector(dx: dx, dy: dy)
-                                myson2.position = originalMyson2Pos
-                                myson2.physicsBody?.applyImpulse(impulse)
                                 hasGone = true
                             
                             }
@@ -144,8 +132,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
+        
+        if !hasGone2{
+            if let touch = touches.first {
+                let touchLocation = touch.location(in: self)
+                let touchedWhere = nodes(at: touchLocation)
+                if !touchedWhere.isEmpty {
+                    for node in touchedWhere {
+        if let sprite = node as? Birb {
+            if sprite == myson2 {
+                let dx = (touchLocation.x - originalMyson2Pos.x)
+                let dy = (touchLocation.y - originalMyson2Pos.y)
+                let impulse = CGVector(dx: dx, dy: dy)
+                myson2.position = originalMyson2Pos
+                myson2.physicsBody?.applyImpulse(impulse)
+                hasGone2 = true
+            
+            }
+        }
     }
-    
+    }
+            }
+        }
+    }
+                
+                
     override func update(_ currentTime: TimeInterval) {
         if myson.actualHP<=0 {
             myson.removeFromParent()
@@ -212,7 +223,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                        {
                            myson2.physicsBody?.pinned = true
 
-                           hasGone = false
+                           hasGone2 = false
                        }
                    }
 
