@@ -72,7 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				1CAC519727BE4A28009A9AFA /* Sounds */,
-				1C2AB9D2277095C8009DCD64 /* Learn2SpriteKit */,
+				1C2AB9D2277095C8009DCD64 /* MOAI Demo */,
 				1C2AB9D1277095C8009DCD64 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -85,7 +85,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1C2AB9D2277095C8009DCD64 /* Learn2SpriteKit */ = {
+		1C2AB9D2277095C8009DCD64 /* MOAI Demo */ = {
 			isa = PBXGroup;
 			children = (
 				1CB5710927BD06A900185669 /* SupportCode.swift */,
@@ -109,7 +109,7 @@
 				1C2AB9D7277095C8009DCD64 /* Actions.sks */,
 				1C2AB9E0277095C9009DCD64 /* Assets.xcassets */,
 			);
-			path = Learn2SpriteKit;
+			path = "MOAI Demo";
 			sourceTree = "<group>";
 		};
 		1CAC519727BE4A28009A9AFA /* Sounds */ = {
