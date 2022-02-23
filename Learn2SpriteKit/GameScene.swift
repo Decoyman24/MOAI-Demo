@@ -53,6 +53,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var originalMysonPos: CGPoint!
     var originalMyson2Pos: CGPoint!
     var hasGone = false
+    var hasGone2 = false
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !hasGone {
@@ -120,6 +121,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                             if sprite == myson {
                                 let dx = (touchLocation.x - originalMysonPos.x)
                                 let dy = (touchLocation.y - originalMysonPos.y)
+                                myson.position = originalMysonPos
                                 let impulse = CGVector(dx: dx*1.5, dy: dy*1.5)
                                 
                                 myson.physicsBody?.applyImpulse(impulse)
@@ -131,8 +133,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                             if sprite == myson2 {
                                 let dx = (touchLocation.x - originalMyson2Pos.x)
                                 let dy = (touchLocation.y - originalMyson2Pos.y)
-                                let impulse = CGVector(dx: dx*1.5, dy: dy*1.5)
-                                
+                                let impulse = CGVector(dx: dx, dy: dy)
+                                myson2.position = originalMyson2Pos
                                 myson2.physicsBody?.applyImpulse(impulse)
                                 hasGone = true
                             
@@ -215,7 +217,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                    }
 
     }
-    
     //    func collisionBetween(myson: SKNode, object: SKNode) {
     //        if object.name == "dino" {
     //    print("clash")
@@ -223,13 +224,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //    print("wall")
     //    }
     //    }
-    
-    
     func clash (body1: Goblin, body2: Blackie) {
         print("CLASH!")
+        let lifebar = body2.playerbar
 //        body1.actualHP -= 10
-//        body2.actualHP -= 10
-//        body2.updateHealthBar(body2, withHealthPoints: body2.actualHP, withMaxHP: body2.HP)
+        body2.actualHP -= 10
+        body2.updateHealthBar(lifebar, withHealthPoints: body2.actualHP, withMaxHP: body2.HP)
+        body2.playerbar.position = CGPoint(x: body2.position.x, y: body2.position.y - 20)
     }
     
     
@@ -298,7 +299,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         myenemy.addChild(myenemy.playerbar)
         //        enemyPiece.physicsBody?.isDynamic = true
         
-        myson.position = CGPoint(x: 0, y: -180)
+        myson.position = CGPoint(x: -60, y: -180)
         myson.name = "Goblino"
         myson.physicsBody = SKPhysicsBody(circleOfRadius: myson.size.width/3)
         myson.physicsBody?.mass = 0.5
