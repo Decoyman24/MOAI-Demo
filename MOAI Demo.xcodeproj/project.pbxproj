@@ -18,8 +18,10 @@
 		1C89397227B2A19A007EE33F /* GameSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C89397127B2A19A007EE33F /* GameSprite.swift */; };
 		1CAC519927BE4A41009A9AFA /* pop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1CAC519827BE4A41009A9AFA /* pop.mp3 */; };
 		1CB5710A27BD06A900185669 /* SupportCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5710927BD06A900185669 /* SupportCode.swift */; };
-		1CB5710C27BD486100185669 /* AllyMonster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5710B27BD486100185669 /* AllyMonster.swift */; };
-		1CB5710E27BD4B1300185669 /* EnemyMonster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5710D27BD4B1300185669 /* EnemyMonster.swift */; };
+		1CB5710C27BD486100185669 /* Goblin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5710B27BD486100185669 /* Goblin.swift */; };
+		1CB5710E27BD4B1300185669 /* Blackie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5710D27BD4B1300185669 /* Blackie.swift */; };
+		1CBABDAB27C6341C00975EFC /* Birb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBABDAA27C6341C00975EFC /* Birb.swift */; };
+		1CBABDAD27C6342800975EFC /* Dino.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CBABDAC27C6342800975EFC /* Dino.swift */; };
 		1CDA603327AC273900CD7B7F /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1CDA603527AC273900CD7B7F /* GameScene.sks */; };
 		434A36EB27BBF9D900F336D7 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A36EA27BBF9D900F336D7 /* Types.swift */; };
 		439DFF6527BEA749004D323B /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439DFF6427BEA749004D323B /* MenuScene.swift */; };
@@ -40,8 +42,10 @@
 		1C89397127B2A19A007EE33F /* GameSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSprite.swift; sourceTree = "<group>"; };
 		1CAC519827BE4A41009A9AFA /* pop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pop.mp3; sourceTree = "<group>"; };
 		1CB5710927BD06A900185669 /* SupportCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportCode.swift; sourceTree = "<group>"; };
-		1CB5710B27BD486100185669 /* AllyMonster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllyMonster.swift; sourceTree = "<group>"; };
-		1CB5710D27BD4B1300185669 /* EnemyMonster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyMonster.swift; sourceTree = "<group>"; };
+		1CB5710B27BD486100185669 /* Goblin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goblin.swift; sourceTree = "<group>"; };
+		1CB5710D27BD4B1300185669 /* Blackie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blackie.swift; sourceTree = "<group>"; };
+		1CBABDAA27C6341C00975EFC /* Birb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Birb.swift; sourceTree = "<group>"; };
+		1CBABDAC27C6342800975EFC /* Dino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dino.swift; sourceTree = "<group>"; };
 		1CDA603427AC273900CD7B7F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Base; path = Base.lproj/GameScene.sks; sourceTree = "<group>"; };
 		434A36EA27BBF9D900F336D7 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		439DFF6427BEA749004D323B /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
@@ -80,11 +84,9 @@
 		1C2AB9D2277095C8009DCD64 /* Learn2SpriteKit */ = {
 			isa = PBXGroup;
 			children = (
+				1CBABDA927C62F8300975EFC /* Classes */,
 				1CB5710927BD06A900185669 /* SupportCode.swift */,
 				434A36EA27BBF9D900F336D7 /* Types.swift */,
-				1C89397127B2A19A007EE33F /* GameSprite.swift */,
-				1CB5710B27BD486100185669 /* AllyMonster.swift */,
-				1CB5710D27BD4B1300185669 /* EnemyMonster.swift */,
 				1C2AB9D9277095C8009DCD64 /* GameScene.swift */,
 				1C2AB9DB277095C8009DCD64 /* GameViewController.swift */,
 				439DFF6427BEA749004D323B /* MenuScene.swift */,
@@ -107,6 +109,18 @@
 				1C7277C827C3CEB600467D65 /* Bruh Sound Effect.mp3 */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		1CBABDA927C62F8300975EFC /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				1C89397127B2A19A007EE33F /* GameSprite.swift */,
+				1CB5710B27BD486100185669 /* Goblin.swift */,
+				1CB5710D27BD4B1300185669 /* Blackie.swift */,
+				1CBABDAA27C6341C00975EFC /* Birb.swift */,
+				1CBABDAC27C6342800975EFC /* Dino.swift */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,13 +200,15 @@
 			files = (
 				1C89397227B2A19A007EE33F /* GameSprite.swift in Sources */,
 				1C2AB9DA277095C8009DCD64 /* GameScene.swift in Sources */,
-				1CB5710E27BD4B1300185669 /* EnemyMonster.swift in Sources */,
+				1CB5710E27BD4B1300185669 /* Blackie.swift in Sources */,
 				439DFF6527BEA749004D323B /* MenuScene.swift in Sources */,
+				1CBABDAB27C6341C00975EFC /* Birb.swift in Sources */,
 				1CB5710A27BD06A900185669 /* SupportCode.swift in Sources */,
 				439DFF6727BEA990004D323B /* SpriteKitButton.swift in Sources */,
 				1C2AB9DC277095C8009DCD64 /* GameViewController.swift in Sources */,
+				1CBABDAD27C6342800975EFC /* Dino.swift in Sources */,
 				439DFF6927BEA9C1004D323B /* SKNode Ext.swift in Sources */,
-				1CB5710C27BD486100185669 /* AllyMonster.swift in Sources */,
+				1CB5710C27BD486100185669 /* Goblin.swift in Sources */,
 				434A36EB27BBF9D900F336D7 /* Types.swift in Sources */,
 				1C2AB9D4277095C8009DCD64 /* AppDelegate.swift in Sources */,
 			);

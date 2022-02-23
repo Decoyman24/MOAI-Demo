@@ -47,24 +47,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //        }
     //    }
     var sceneManagerDelegate: SceneManagerDelegate?
-    var myson = AllyMonster()
-    var myenemy = EnemyMonster()
+    var myson = Goblin()
+    var myenemy = Blackie()
+    var myson2 = Birb()
     var originalMysonPos: CGPoint!
+    var originalMyson2Pos: CGPoint!
     var hasGone = false
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        myson.physicsBody?.pinned = false
         if !hasGone {
             if let touch = touches.first {
                 let touchLocation = touch.location(in: self)
                 let touchedWhere = nodes(at: touchLocation)
+                myson.physicsBody?.pinned = false
+                myson2.physicsBody?.pinned = false
                 
                 if !touchedWhere.isEmpty {
                     for node in touchedWhere {
                         originalMysonPos = touchLocation
-                        if let sprite = node as? AllyMonster {
+                        originalMyson2Pos = touchLocation
+                        if let sprite = node as? Goblin {
                             if sprite == myson {
                                 myson.position = touchLocation
+                            }
+                        }
+                        if let sprite = node as? Birb {
+                            if sprite == myson2 {
+                                myson2.position = touchLocation
                             }
                         }
                     }
@@ -76,7 +85,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        myson.physicsBody?.isDynamic = true
         if !hasGone {
             if let touch = touches.first {
                 let touchLocation = touch.location(in: self)
@@ -84,9 +92,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 if !touchedWhere.isEmpty {
                     for node in touchedWhere {
-                        if let sprite = node as? AllyMonster {
+                        if let sprite = node as? Goblin {
                             if sprite == myson {
                                 myson.position = touchLocation
+                            }
+                        }
+                        else if let sprite = node as? Birb {
+                            if sprite == myson2 {
+                                myson2.position = touchLocation
                             }
                         }
                     }
@@ -103,13 +116,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
                 if !touchedWhere.isEmpty {
                     for node in touchedWhere {
-                        if let sprite = node as? AllyMonster {
+                        if let sprite = node as? Goblin {
                             if sprite == myson {
                                 let dx = (touchLocation.x - originalMysonPos.x)
                                 let dy = (touchLocation.y - originalMysonPos.y)
                                 let impulse = CGVector(dx: dx*1.5, dy: dy*1.5)
                                 
                                 myson.physicsBody?.applyImpulse(impulse)
+                                hasGone = true
+                            
+                            }
+                        }
+                        if let sprite = node as? Birb {
+                            if sprite == myson2 {
+                                let dx = (touchLocation.x - originalMyson2Pos.x)
+                                let dy = (touchLocation.y - originalMyson2Pos.y)
+                                let impulse = CGVector(dx: dx*1.5, dy: dy*1.5)
+                                
+                                myson2.physicsBody?.applyImpulse(impulse)
                                 hasGone = true
                             
                             }
@@ -127,6 +151,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if myenemy.actualHP<=0 {
             myenemy.removeFromParent()
+        }
+        
+        if myson2.actualHP<=0 {
+            myson2.removeFromParent()
         }
         
         if let mysonPhysicsBody = myson.physicsBody {
@@ -157,6 +185,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                            hasGone = false
                        }
                    }
+        if let myson2PhysicsBody = myson2.physicsBody {
+                       
+                       if myson2PhysicsBody.velocity.dx > 0.5 && hasGone {
+                           myson2.physicsBody?.velocity.dx -= 1.1
+                           }
+                       if myson2PhysicsBody.velocity.dx < -0.5 && hasGone {
+                           myson2.physicsBody?.velocity.dx += 1.1
+                           }
+                       else if myson2PhysicsBody.velocity.dx <= 0.5 && myson2PhysicsBody.velocity.dx >= -0.5 && hasGone {
+                           myson2.physicsBody?.velocity.dx = 0.0
+                       }
+                       
+                       if myson2PhysicsBody.velocity.dy > 0.5 && hasGone {
+                           myson2.physicsBody?.velocity.dy -= 1.1
+                           }
+                       if myson2PhysicsBody.velocity.dy < -0.5 && hasGone {
+                           myson2.physicsBody?.velocity.dy += 1.1
+                           }
+                       else if myson2PhysicsBody.velocity.dy <= 0.5 && myson2PhysicsBody.velocity.dy >= -0.5 && hasGone {
+                           myson2.physicsBody?.velocity.dy = 0.0
+                       }
+                       if myson2PhysicsBody.velocity.dx == 0 && myson2PhysicsBody.velocity.dy == 0 && hasGone
+                       {
+                           myson2.physicsBody?.pinned = true
+
+                           hasGone = false
+                       }
+                   }
 
     }
     
@@ -169,11 +225,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //    }
     
     
-    func clash (body1: AllyMonster, body2: EnemyMonster) {
+    func clash (body1: Goblin, body2: Blackie) {
         print("CLASH!")
 //        body1.actualHP -= 10
-        body2.actualHP -= 10
-        body2.updateHealthBar(body2, withHealthPoints: body2.actualHP, withMaxHP: body2.HP)
+//        body2.actualHP -= 10
+//        body2.updateHealthBar(body2, withHealthPoints: body2.actualHP, withMaxHP: body2.HP)
     }
     
     
@@ -227,7 +283,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         myenemy.position = CGPoint(x: 0, y: +160)
-        myenemy.name = "dino"
+        myenemy.name = "Blackie"
         myenemy.playerbar.position = CGPoint(x: myenemy.position.x, y: myenemy.position.y - 20)
         myenemy.setScale(0.4)
         myenemy.physicsBody = SKPhysicsBody(circleOfRadius: myenemy.size.width/3)
@@ -243,7 +299,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //        enemyPiece.physicsBody?.isDynamic = true
         
         myson.position = CGPoint(x: 0, y: -180)
-        myson.name = "myson"
+        myson.name = "Goblino"
         myson.physicsBody = SKPhysicsBody(circleOfRadius: myson.size.width/3)
         myson.physicsBody?.mass = 0.5
         myson.physicsBody?.categoryBitMask = PhysicsCategory.Ally
@@ -258,6 +314,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //        myson.physicsBody?.isDynamic = true
         myson.setScale(0.4)
         myson.addChild(myson.playerbar)
+        
+        myson2.position = CGPoint(x: 60, y: -180)
+        myson2.name = "Birbo"
+        myson2.physicsBody = SKPhysicsBody(circleOfRadius: myson2.size.width/3)
+        myson2.physicsBody?.mass = 0.5
+        myson2.physicsBody?.categoryBitMask = PhysicsCategory.Ally
+        myson2.physicsBody?.collisionBitMask = PhysicsCategory.Enemy
+        myson2.physicsBody?.contactTestBitMask = PhysicsCategory.Enemy
+        myson2.physicsBody?.allowsRotation = false
+        myson2.physicsBody?.restitution = 0.3
+        myson2.physicsBody?.friction = 0.8
+        originalMyson2Pos = myson2.position
+        myson2.playerbar.position = CGPoint(x: myson2.position.x, y: myson2.position.y-(myson2.position.y*2 + 20))
+        addChild(myson2)
+        //        myson.physicsBody?.isDynamic = true
+        myson2.setScale(0.4)
+        myson2.addChild(myson2.playerbar)
         
         
         //

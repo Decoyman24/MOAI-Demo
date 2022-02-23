@@ -6,7 +6,7 @@
 //
 import SpriteKit
 
-class EnemyMonster : SKSpriteNode, GameSprite, EventListenerNode {
+class Blackie : SKSpriteNode, GameSprite, EventListenerNode {
     
     var initialSize: CGSize = CGSize (width: 250, height: 250)
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "blackie")
@@ -53,10 +53,10 @@ class EnemyMonster : SKSpriteNode, GameSprite, EventListenerNode {
             self.removeFromParent()
         }
         
-        if let redSlimePhysicsBody = EnemyMonster().physicsBody {
+        if let redSlimePhysicsBody = Blackie().physicsBody {
             if redSlimePhysicsBody.velocity.dx <= 0.0 && redSlimePhysicsBody.velocity.dy <= 0.1{
-                EnemyMonster().physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-                EnemyMonster().zRotation = 0
+                Blackie().physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                Blackie().zRotation = 0
                 }
             }
         }
@@ -80,7 +80,7 @@ class EnemyMonster : SKSpriteNode, GameSprite, EventListenerNode {
         else if actualHP<=0 {
             playerbar.run(SKAction.removeFromParent())
             run(SKAction.removeFromParent())
-            print("Hai muorto")
+            print("Ha muorto el blackie")
         }
     }
     

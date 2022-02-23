@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-class AllyMonster : SKSpriteNode, GameSprite, EventListenerNode {
+class Goblin : SKSpriteNode, GameSprite, EventListenerNode {
     var initialSize: CGSize = CGSize (width: 250, height: 250)
     var textureAtlas: SKTextureAtlas = SKTextureAtlas(named: "goblin")
     var idleAnimation = SKAction()
@@ -52,10 +52,10 @@ class AllyMonster : SKSpriteNode, GameSprite, EventListenerNode {
             self.removeFromParent()
         }
         
-        if let redSlimePhysicsBody = AllyMonster().physicsBody {
+        if let redSlimePhysicsBody = Goblin().physicsBody {
             if redSlimePhysicsBody.velocity.dx <= 0.0 && redSlimePhysicsBody.velocity.dy <= 0.1{
-                AllyMonster().physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-                AllyMonster().zRotation = 0
+                Goblin().physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+                Goblin().zRotation = 0
                 }
             }
         }
@@ -78,7 +78,7 @@ class AllyMonster : SKSpriteNode, GameSprite, EventListenerNode {
         else if actualHP<=0 {
             playerbar.run(SKAction.removeFromParent())
             run(SKAction.removeFromParent())
-            print("Hai muorto")
+            print("Ha muorto el goblino")
         }
     }
     
