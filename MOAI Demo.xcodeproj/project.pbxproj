@@ -73,6 +73,7 @@
 		1C2AB9C7277095C8009DCD64 = {
 			isa = PBXGroup;
 			children = (
+				431D00DA27C687E100DEAB18 /* Classes */,
 				1CAC519727BE4A28009A9AFA /* Sounds */,
 				1C2AB9D2277095C8009DCD64 /* Learn2SpriteKit */,
 				1C2AB9D1277095C8009DCD64 /* Products */,
@@ -122,6 +123,14 @@
 				1C7277C827C3CEB600467D65 /* Bruh Sound Effect.mp3 */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		431D00DA27C687E100DEAB18 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Classes;
+			path = Learn2SpriteKit/Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
