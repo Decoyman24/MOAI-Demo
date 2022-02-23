@@ -235,14 +235,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //    print("wall")
     //    }
     //    }
-    func clash (body1: Goblin, body2: Blackie) {
-        print("CLASH!")
-        let lifebar = body2.playerbar
-//        body1.actualHP -= 10
-        body2.actualHP -= 10
-        body2.updateHealthBar(lifebar, withHealthPoints: body2.actualHP, withMaxHP: body2.HP)
-        body2.playerbar.position = CGPoint(x: body2.position.x, y: body2.position.y - 20)
-    }
     
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -250,6 +242,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if collision == PhysicsCategory.Enemy | PhysicsCategory.Ally {
             run(SKAction.playSoundFileNamed("Bruh Sound Effect.mp3", waitForCompletion: false))
             clash(body1: myson, body2: myenemy)
+            func clash (body1: Goblin, body2: Blackie) {
+                let lifebar = body2.playerbar
+        //        body1.actualHP -= 10
+                body2.actualHP = max(0, body2.actualHP - (body1.PWR - (body2.DEF)/2))
+                body2.updateHealthBar(lifebar, withHealthPoints: body2.actualHP, withMaxHP: body2.HP)
+                body2.playerbar.position = CGPoint(x: body2.position.x, y: body2.position.y)
+                print("hp di blackie: \(body2.actualHP)")
+            }
             
         }
     }
@@ -299,13 +299,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         myenemy.playerbar.position = CGPoint(x: myenemy.position.x, y: myenemy.position.y - 20)
         myenemy.setScale(0.4)
         myenemy.physicsBody = SKPhysicsBody(circleOfRadius: myenemy.size.width/3)
-        myenemy.physicsBody?.mass = 1.2
+        myenemy.physicsBody?.mass = 0.5
         myenemy.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
         myenemy.physicsBody?.collisionBitMask = PhysicsCategory.Ally
         myenemy.physicsBody?.contactTestBitMask = PhysicsCategory.Ally
         myenemy.physicsBody?.allowsRotation = false
-        myenemy.physicsBody?.restitution = 0.5
-        myenemy.physicsBody?.friction = 0.8
+        myenemy.physicsBody?.restitution = 0.8
+        myenemy.physicsBody?.friction = 0.0
         addChild(myenemy)
         myenemy.addChild(myenemy.playerbar)
         //        enemyPiece.physicsBody?.isDynamic = true
@@ -318,8 +318,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         myson.physicsBody?.collisionBitMask = PhysicsCategory.Enemy
         myson.physicsBody?.contactTestBitMask = PhysicsCategory.Enemy
         myson.physicsBody?.allowsRotation = false
-        myson.physicsBody?.restitution = 0.3
-        myson.physicsBody?.friction = 0.8
+        myson.physicsBody?.restitution = 1.0
+        myson.physicsBody?.friction = 0.0
         originalMysonPos = myson.position
         myson.playerbar.position = CGPoint(x: myson.position.x, y: myson.position.y-(myson.position.y*2 + 20))
         addChild(myson)
@@ -335,8 +335,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         myson2.physicsBody?.collisionBitMask = PhysicsCategory.Enemy
         myson2.physicsBody?.contactTestBitMask = PhysicsCategory.Enemy
         myson2.physicsBody?.allowsRotation = false
-        myson2.physicsBody?.restitution = 0.3
-        myson2.physicsBody?.friction = 0.8
+        myson2.physicsBody?.restitution = 1.0
+        myson2.physicsBody?.friction = 0.0
         originalMyson2Pos = myson2.position
         myson2.playerbar.position = CGPoint(x: myson2.position.x, y: myson2.position.y-(myson2.position.y*2 + 20))
         addChild(myson2)
@@ -360,9 +360,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     //
-    //        player1HP = max(0, player1HP - (slime2.PWR - (slime1.DEF)/2))
-    //        player2HP = max(0, player2HP - (slime1.PWR - (slime2.DEF)/2))
-    
+//            player1HP = max(0, player1HP - (slime2.PWR - (slime1.DEF)/2))
+//            player2HP = max(0, player2HP - (slime1.PWR - (slime2.DEF)/2))
+//
     
     
     

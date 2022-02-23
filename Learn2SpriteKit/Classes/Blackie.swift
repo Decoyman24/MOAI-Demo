@@ -84,7 +84,7 @@ class Blackie : SKSpriteNode, GameSprite, EventListenerNode {
         }
     }
     
-    var HP = 30
+    var HP = 100
     var PWR = statValue.nextInt()
     var DEF = statValue.nextInt()
     var AGI = statValue.nextInt()
