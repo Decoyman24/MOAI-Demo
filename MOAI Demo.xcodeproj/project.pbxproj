@@ -20,6 +20,7 @@
 		1CB5710A27BD06A900185669 /* SupportCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5710927BD06A900185669 /* SupportCode.swift */; };
 		1CB5710C27BD486100185669 /* Redslime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5710B27BD486100185669 /* Redslime.swift */; };
 		1CB5710E27BD4B1300185669 /* Badslime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB5710D27BD4B1300185669 /* Badslime.swift */; };
+		431D00D927C6700100DEAB18 /* oh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 431D00D827C6700100DEAB18 /* oh.mp3 */; };
 		434A36EB27BBF9D900F336D7 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A36EA27BBF9D900F336D7 /* Types.swift */; };
 		439DFF6527BEA749004D323B /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439DFF6427BEA749004D323B /* MenuScene.swift */; };
 		439DFF6727BEA990004D323B /* SpriteKitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439DFF6627BEA990004D323B /* SpriteKitButton.swift */; };
@@ -46,6 +47,7 @@
 		1CB5710927BD06A900185669 /* SupportCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportCode.swift; sourceTree = "<group>"; };
 		1CB5710B27BD486100185669 /* Redslime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Redslime.swift; sourceTree = "<group>"; };
 		1CB5710D27BD4B1300185669 /* Badslime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badslime.swift; sourceTree = "<group>"; };
+		431D00D827C6700100DEAB18 /* oh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = oh.mp3; sourceTree = "<group>"; };
 		434A36EA27BBF9D900F336D7 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		439DFF6427BEA749004D323B /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		439DFF6627BEA990004D323B /* SpriteKitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitButton.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				1CAC519827BE4A41009A9AFA /* pop.mp3 */,
+				431D00D827C6700100DEAB18 /* oh.mp3 */,
 				1C7277C827C3CEB600467D65 /* Bruh Sound Effect.mp3 */,
 			);
 			path = Sounds;
@@ -184,6 +187,7 @@
 				1C2AB9DF277095C8009DCD64 /* Main.storyboard in Resources */,
 				A6E7F9C527C3E90800DFF021 /* LevelSelectionScene.sks in Resources */,
 				1C2AB9E1277095C9009DCD64 /* Assets.xcassets in Resources */,
+				431D00D927C6700100DEAB18 /* oh.mp3 in Resources */,
 				1C2AB9E4277095C9009DCD64 /* LaunchScreen.storyboard in Resources */,
 				1C2AB9D8277095C8009DCD64 /* Actions.sks in Resources */,
 				43E5539927C546450089E585 /* GameScene.sks in Resources */,

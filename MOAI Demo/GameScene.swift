@@ -188,7 +188,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         if collision == PhysicsCategory.Enemy | PhysicsCategory.Ally {
-            run(SKAction.playSoundFileNamed("Bruh Sound Effect.mp3", waitForCompletion: false))
+            run(SKAction.playSoundFileNamed("oh.mp3", waitForCompletion: false))
         }
         
         func didEnd(_ contact: SKPhysicsContact) {
@@ -339,27 +339,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             body1.actualHP -= 10
             body2.actualHP -= 10
         }
-        
-        
     }
-    
-    //MARK: HEALTH BARS POSITION
-    
-    
-    
-    
-    //MARK: DMG CALC WITH FRAMES
-    
-    
-    //
-    //        player1HP = max(0, player1HP - (slime2.PWR - (slime1.DEF)/2))
-    //        player2HP = max(0, player2HP - (slime1.PWR - (slime2.DEF)/2))
-    
-    
-    
-    
-    
-    //MARK: UPDATE HB FUNCTION
-    
 }
 
