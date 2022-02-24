@@ -54,6 +54,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var originalMyson2Pos: CGPoint!
     var hasGone = false
     var hasGone2 = false
+    var arena = SKNode()
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !hasGone {
@@ -260,7 +261,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     
     override func didMove(to view: SKView) {
-        
+        if let arenaria = self.childNode(withName: "Arena") as? SKSpriteNode {
+                arena = arenaria
+            arena.physicsBody?.collisionBitMask = PhysicsCategory.Enemy | PhysicsCategory.Ally
+            arena.physicsBody?.categoryBitMask = PhysicsCategory.Edge
+            arena.physicsBody?.pinned = true
+            arena.physicsBody?.isDynamic = true
+            }
+
         //        let maxAspectRatio: CGFloat = 16.0/9.0
         //        let maxAspectRatioHeight = size.width / maxAspectRatio
         //        let playableMargin: CGFloat = (size.height
@@ -291,7 +299,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         view.showsPhysics = false
         view.showsFPS = true
         view.showsNodeCount = true
-        view.showsPhysics = true
+        view.showsPhysics = false
         
         
         myenemy.position = CGPoint(x: 0, y: +160)
@@ -301,7 +309,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         myenemy.physicsBody = SKPhysicsBody(circleOfRadius: myenemy.size.width/3)
         myenemy.physicsBody?.mass = 0.5
         myenemy.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
-        myenemy.physicsBody?.collisionBitMask = PhysicsCategory.Ally
+//        myenemy.physicsBody?.collisionBitMask = PhysicsCategory.Ally
         myenemy.physicsBody?.contactTestBitMask = PhysicsCategory.Ally
         myenemy.physicsBody?.allowsRotation = false
         myenemy.physicsBody?.restitution = 0.8

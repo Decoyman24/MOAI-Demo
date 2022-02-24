@@ -65,7 +65,7 @@ class Blackie : SKSpriteNode, GameSprite, EventListenerNode {
         //      physicsBody!.isDynamic = false
         self.physicsBody = SKPhysicsBody(circleOfRadius: self.size.width/2)
         self.physicsBody!.categoryBitMask = PhysicsCategory.Enemy
-        self.physicsBody!.collisionBitMask = PhysicsCategory.Ally
+        self.physicsBody!.collisionBitMask = PhysicsCategory.Ally | PhysicsCategory.Edge
 //        self.physicsBody!.contactTestBitMask = PhysicsCategory.Enemy | PhysicsCategory.Ally
     }
     
