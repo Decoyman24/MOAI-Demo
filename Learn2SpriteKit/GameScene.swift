@@ -62,17 +62,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let touchLocation = touch.location(in: self)
                 let touchedWhere = nodes(at: touchLocation)
                 myson.physicsBody?.pinned = false
-                myson2.physicsBody?.pinned = false
                 
                 if !touchedWhere.isEmpty {
                     for node in touchedWhere {
                         originalMysonPos = touchLocation
-                        originalMyson2Pos = touchLocation
                         if let sprite = node as? Goblin {
                             if sprite == myson {
+                                
                                 myson.position = touchLocation
                             }
                         }
+                    }
+                }
+            }
+        }
+       if !hasGone2 {
+            if let touch = touches.first {
+                let touchLocation = touch.location(in: self)
+                let touchedWhere = nodes(at: touchLocation)
+                myson2.physicsBody?.pinned = false
+                if !touchedWhere.isEmpty {
+                    for node in touchedWhere {
+                        originalMyson2Pos = touchLocation
                         if let sprite = node as? Birb {
                             if sprite == myson2 {
                                 myson2.position = touchLocation
@@ -98,7 +109,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                 myson.position = touchLocation
                             }
                         }
-                        else if let sprite = node as? Birb {
+                        
+                    }
+                }
+            }
+        }
+        if !hasGone2{
+            if let touch = touches.first {
+                let touchLocation = touch.location(in: self)
+                let touchedWhere = nodes(at: touchLocation)
+                if !touchedWhere.isEmpty {
+                    for node in touchedWhere {
+                        if let sprite = node as? Birb {
                             if sprite == myson2 {
                                 myson2.position = touchLocation
                             }
@@ -108,7 +130,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !hasGone {
             if let touch = touches.first {
@@ -119,14 +140,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     for node in touchedWhere {
                         if let sprite = node as? Goblin {
                             if sprite == myson {
-                                let dx = (touchLocation.x - originalMysonPos.x)
-                                let dy = (touchLocation.y - originalMysonPos.y)
-                                myson.position = originalMysonPos
-                                let impulse = CGVector(dx: dx, dy: dy)
-                                
+                                var dx = (touchLocation.x - originalMyson2Pos.x)
+                                                if dx > 80{
+                                                    dx = 80
+                                                }
+                                                else if dx < -80 {
+                                                    dx = -80
+                                                }
+                                                var dy = (touchLocation.y - originalMyson2Pos.y)
+                                                if dy > 80{
+                                                    dy = 80
+                                                }
+                                                else if dy < -80 {
+                                                    dy = -80
+                                                }
+                                                let impulse = CGVector(dx: dx, dy: dy)
                                 myson.physicsBody?.applyImpulse(impulse)
                                 hasGone = true
-                            
+                                hasGone2 = true
+                                
+                                
                             }
                         }
                     }
@@ -134,30 +167,43 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-        if !hasGone2{
+       if !hasGone2{
             if let touch = touches.first {
                 let touchLocation = touch.location(in: self)
                 let touchedWhere = nodes(at: touchLocation)
                 if !touchedWhere.isEmpty {
                     for node in touchedWhere {
-        if let sprite = node as? Birb {
-            if sprite == myson2 {
-                let dx = (touchLocation.x - originalMyson2Pos.x)
-                let dy = (touchLocation.y - originalMyson2Pos.y)
-                let impulse = CGVector(dx: dx, dy: dy)
-                myson2.position = originalMyson2Pos
-                myson2.physicsBody?.applyImpulse(impulse)
-                hasGone2 = true
-            
+                        if let sprite = node as? Birb {
+                            if sprite == myson2 {
+                                var dx = (touchLocation.x - originalMyson2Pos.x)
+                                                if dx > 80{
+                                                    dx = 80
+                                                }
+                                                else if dx < -80 {
+                                                    dx = -80
+                                                }
+                                                var dy = (touchLocation.y - originalMyson2Pos.y)
+                                                if dy > 80{
+                                                    dy = 80
+                                                }
+                                                else if dy < -80 {
+                                                    dy = -80
+                                                }
+                                                let impulse = CGVector(dx: dx, dy: dy)
+                                myson2.position = originalMyson2Pos
+                                myson2.physicsBody?.applyImpulse(impulse)
+                                hasGone2 = true
+                                hasGone = true
+                                
+                            }
+                        }
+                    }
+                }
             }
         }
     }
-    }
-            }
-        }
-    }
-                
-                
+    
+    
     override func update(_ currentTime: TimeInterval) {
         if myson.actualHP<=0 {
             myson.removeFromParent()
@@ -172,62 +218,73 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if let mysonPhysicsBody = myson.physicsBody {
-                       
-                       if mysonPhysicsBody.velocity.dx > 0.5 && hasGone {
-                           myson.physicsBody?.velocity.dx -= 1.1
-                           }
-                       if mysonPhysicsBody.velocity.dx < -0.5 && hasGone {
-                           myson.physicsBody?.velocity.dx += 1.1
-                           }
-                       else if mysonPhysicsBody.velocity.dx <= 0.5 && mysonPhysicsBody.velocity.dx >= -0.5 && hasGone {
-                           myson.physicsBody?.velocity.dx = 0.0
-                       }
-                       
-                       if mysonPhysicsBody.velocity.dy > 0.5 && hasGone {
-                           myson.physicsBody?.velocity.dy -= 1.1
-                           }
-                       if mysonPhysicsBody.velocity.dy < -0.5 && hasGone {
-                           myson.physicsBody?.velocity.dy += 1.1
-                           }
-                       else if mysonPhysicsBody.velocity.dy <= 0.5 && mysonPhysicsBody.velocity.dy >= -0.5 && hasGone {
-                           myson.physicsBody?.velocity.dy = 0.0
-                       }
-                       if mysonPhysicsBody.velocity.dx == 0 && mysonPhysicsBody.velocity.dy == 0 && hasGone
-                       {
-                           myson.physicsBody?.pinned = true
-
-                           hasGone = false
-                       }
-                   }
+            
+            if mysonPhysicsBody.velocity.dx > 0.5 && hasGone {
+                myson.physicsBody?.velocity.dx -= 1.1
+            }
+            if mysonPhysicsBody.velocity.dx < -0.5 && hasGone {
+                myson.physicsBody?.velocity.dx += 1.1
+            }
+            else if mysonPhysicsBody.velocity.dx <= 0.5 && mysonPhysicsBody.velocity.dx >= -0.5 && hasGone {
+                myson.physicsBody?.velocity.dx = 0.0
+            }
+            
+            if mysonPhysicsBody.velocity.dy > 0.5 && hasGone {
+                myson.physicsBody?.velocity.dy -= 1.1
+            }
+            if mysonPhysicsBody.velocity.dy < -0.5 && hasGone {
+                myson.physicsBody?.velocity.dy += 1.1
+            }
+            else if mysonPhysicsBody.velocity.dy <= 0.5 && mysonPhysicsBody.velocity.dy >= -0.5 && hasGone {
+                myson.physicsBody?.velocity.dy = 0.0
+            }
+            if mysonPhysicsBody.velocity.dx == 0 && mysonPhysicsBody.velocity.dy == 0 && hasGone
+            {
+                myson.physicsBody?.pinned = true
+                
+                hasGone = false
+                hasGone2 = false
+            }
+        }
         if let myson2PhysicsBody = myson2.physicsBody {
-                       
-                       if myson2PhysicsBody.velocity.dx > 0.5 && hasGone {
-                           myson2.physicsBody?.velocity.dx -= 1.1
-                           }
-                       if myson2PhysicsBody.velocity.dx < -0.5 && hasGone {
-                           myson2.physicsBody?.velocity.dx += 1.1
-                           }
-                       else if myson2PhysicsBody.velocity.dx <= 0.5 && myson2PhysicsBody.velocity.dx >= -0.5 && hasGone {
-                           myson2.physicsBody?.velocity.dx = 0.0
-                       }
-                       
-                       if myson2PhysicsBody.velocity.dy > 0.5 && hasGone {
-                           myson2.physicsBody?.velocity.dy -= 1.1
-                           }
-                       if myson2PhysicsBody.velocity.dy < -0.5 && hasGone {
-                           myson2.physicsBody?.velocity.dy += 1.1
-                           }
-                       else if myson2PhysicsBody.velocity.dy <= 0.5 && myson2PhysicsBody.velocity.dy >= -0.5 && hasGone {
-                           myson2.physicsBody?.velocity.dy = 0.0
-                       }
-                       if myson2PhysicsBody.velocity.dx == 0 && myson2PhysicsBody.velocity.dy == 0 && hasGone
-                       {
-                           myson2.physicsBody?.pinned = true
-
-                           hasGone2 = false
-                       }
-                   }
-
+            
+            if myson2PhysicsBody.velocity.dx > 0.5 && hasGone {
+                myson2.physicsBody?.velocity.dx -= 1.1
+            }
+            if myson2PhysicsBody.velocity.dx < -0.5 && hasGone {
+                myson2.physicsBody?.velocity.dx += 1.1
+            }
+            else if myson2PhysicsBody.velocity.dx <= 0.5 && myson2PhysicsBody.velocity.dx >= -0.5 && hasGone {
+                myson2.physicsBody?.velocity.dx = 0.0
+            }
+            
+            if myson2PhysicsBody.velocity.dy > 0.5 && hasGone {
+                myson2.physicsBody?.velocity.dy -= 1.1
+            }
+            if myson2PhysicsBody.velocity.dy < -0.5 && hasGone {
+                myson2.physicsBody?.velocity.dy += 1.1
+            }
+            else if myson2PhysicsBody.velocity.dy <= 0.5 && myson2PhysicsBody.velocity.dy >= -0.5 && hasGone {
+                myson2.physicsBody?.velocity.dy = 0.0
+            }
+            if myson2PhysicsBody.velocity.dx == 0 && myson2PhysicsBody.velocity.dy == 0 && hasGone
+            {
+                myson2.physicsBody?.pinned = true
+                
+                hasGone2 = false
+                hasGone = false
+            }
+        }
+        
+        if let myson2PhysicsBody = myson2.physicsBody,let mysonPhysicsBody = myson.physicsBody{
+                if mysonPhysicsBody.velocity.dx == 0 && mysonPhysicsBody.velocity.dy == 0 && hasGone && myson2PhysicsBody.velocity.dx == 0 && myson2PhysicsBody.velocity.dy == 0 && hasGone2
+                {
+                    run(SKAction.playSoundFileNamed("pop.mp3", waitForCompletion: false))
+                    hasGone = false
+                    hasGone2 = false
+                }
+                }
+        
     }
     //    func collisionBetween(myson: SKNode, object: SKNode) {
     //        if object.name == "dino" {
@@ -245,7 +302,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             clash(body1: myson, body2: myenemy)
             func clash (body1: Goblin, body2: Blackie) {
                 let lifebar = body2.playerbar
-        //        body1.actualHP -= 10
+                //        body1.actualHP -= 10
                 body2.actualHP = max(0, body2.actualHP - (body1.PWR - (body2.DEF)/2))
                 body2.updateHealthBar(lifebar, withHealthPoints: body2.actualHP, withMaxHP: body2.HP)
                 body2.playerbar.position = CGPoint(x: body2.position.x, y: body2.position.y)
@@ -254,21 +311,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         }
     }
-        func didEnd(_ contact: SKPhysicsContact) {
-            //            let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
-            //            if collision == PhysicsCategory.Enemy | PhysicsCategory.Ally {
-            //            }
-        }
+    func didEnd(_ contact: SKPhysicsContact) {
+        //            let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+        //            if collision == PhysicsCategory.Enemy | PhysicsCategory.Ally {
+        //            }
+    }
     
     override func didMove(to view: SKView) {
         if let arenaria = self.childNode(withName: "Arena") as? SKSpriteNode {
-                arena = arenaria
+            arena = arenaria
             arena.physicsBody?.collisionBitMask = PhysicsCategory.Enemy | PhysicsCategory.Ally
             arena.physicsBody?.categoryBitMask = PhysicsCategory.Edge
             arena.physicsBody?.pinned = true
             arena.physicsBody?.isDynamic = true
-            }
-
+        }
+        
         //        let maxAspectRatio: CGFloat = 16.0/9.0
         //        let maxAspectRatioHeight = size.width / maxAspectRatio
         //        let playableMargin: CGFloat = (size.height
@@ -305,11 +362,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         myenemy.position = CGPoint(x: 0, y: +160)
         myenemy.name = "Blackie"
         myenemy.playerbar.position = CGPoint(x: myenemy.position.x, y: myenemy.position.y - 20)
+        myenemy.playerbar.physicsBody?.pinned = true
         myenemy.setScale(0.4)
         myenemy.physicsBody = SKPhysicsBody(circleOfRadius: myenemy.size.width/3)
         myenemy.physicsBody?.mass = 0.5
         myenemy.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
-//        myenemy.physicsBody?.collisionBitMask = PhysicsCategory.Ally
+        //        myenemy.physicsBody?.collisionBitMask = PhysicsCategory.Ally
         myenemy.physicsBody?.contactTestBitMask = PhysicsCategory.Ally
         myenemy.physicsBody?.allowsRotation = false
         myenemy.physicsBody?.restitution = 0.8
@@ -368,9 +426,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     //
-//            player1HP = max(0, player1HP - (slime2.PWR - (slime1.DEF)/2))
-//            player2HP = max(0, player2HP - (slime1.PWR - (slime2.DEF)/2))
-//
+    //            player1HP = max(0, player1HP - (slime2.PWR - (slime1.DEF)/2))
+    //            player2HP = max(0, player2HP - (slime1.PWR - (slime2.DEF)/2))
+    //
     
     
     
